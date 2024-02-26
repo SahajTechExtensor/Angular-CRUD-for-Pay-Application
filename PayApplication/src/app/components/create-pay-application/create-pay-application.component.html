@@ -1,0 +1,119 @@
+<div class="container">
+    <div class="col-md-12 p-3 ">
+        <h1>Create New Pay Application</h1>
+        <hr>
+        <form [formGroup]="reactiveForm" class="p-5" (ngSubmit)="onSubmit()">
+            <div class="row">
+                <div class="col-md-5">
+                    <div class="mb-4">
+                        <div class="col-md-3"></div>
+                        <label for="applicationNo" class="form-label">Application No:</label>
+             
+       
+                        <input type="text" id="applicationNo" class="form-control" [class.is-invalid]="reactiveForm.get('applicationNo')?.hasError('alphanumeric') &&
+                        reactiveForm.get('applicationNo')?.dirty" formControlName="applicationNo" />
+                        <div *ngIf="
+                            reactiveForm.get('applicationNo').hasError('alphanumeric') &&
+                            reactiveForm.get('applicationNo')?.dirty
+                          " class="error-message invalid-feedback">
+                            Please enter alphanumeric characters only.
+                  </div>
+                    </div>
+                    <div class="mb-4">
+                        <label for="periodStart" class="form-label">Period Start:</label>
+                        <mat-form-field>
+                            <mat-label>Choose a date</mat-label>
+                            <input matInput [matDatepicker]="picker1" class="form-control"
+                                formControlName="periodStart" />
+                            <mat-hint>MM/DD/YYYY</mat-hint>
+                            <mat-datepicker-toggle matIconSuffix [for]="picker1"></mat-datepicker-toggle>
+                            <mat-datepicker #picker1></mat-datepicker>
+                        </mat-form-field>
+                        <div *ngIf="
+                        reactiveForm.get('periodStart')?.invalid &&
+                        reactiveForm.get('periodStart')?.touched
+                      " class="error-message">
+                            Period Start is required
+                        </div>
+                    </div>
+                    <div class="mb-4">
+                        <label for="includeCertificate" class="form-label">Include Certificate and Signature:</label>
+                        <select id="includeCertificate" class="form-select" formControlName="includeCertificate">
+                            <option value="" disabled selected>Select an option</option>
+                            <option value="A">A/E</option>
+                            <option value="C">C/M</option>
+                        </select>
+                        <div *ngIf="
+                        reactiveForm.get('includeCertificate')?.invalid &&
+                        reactiveForm.get('includeCertificate')?.touched
+                      " class="error-message">
+                            Please select an option
+                        </div>
+                    </div>
+                    <div class="mb-4">
+                        <label for="retainage" class="form-label">Retainage %:</label>
+                        <input type="number" id="retainage" class="form-control" formControlName="retainage" />
+                        <div *ngIf="
+                        reactiveForm.get('retainage')?.invalid &&
+                        reactiveForm.get('retainage')?.touched
+                      " class="error-message">
+                            Retainage is required
+                        </div>
+                    </div>
+                </div>
+                <div class="col-md-6">
+
+                    <div class="mb-4">
+                        <label for="applicationDate" class="form-label">Application Date:</label>
+                        <mat-form-field>
+                            <mat-label>Choose a date</mat-label>
+                            <input matInput [matDatepicker]="picker" class="form-control"
+                                formControlName="applicationDate" />
+                            <mat-hint>MM/DD/YYYY</mat-hint>
+                            <mat-datepicker-toggle matIconSuffix [for]="picker"></mat-datepicker-toggle>
+                            <mat-datepicker #picker></mat-datepicker>
+                        </mat-form-field>
+                        <div *ngIf="
+                            reactiveForm.get('applicationDate')?.invalid &&
+                            reactiveForm.get('applicationDate')?.touched
+                          " class="error-message">
+                            Appication Date is required
+                        </div>
+                    </div>
+
+
+                    <div class="mb-4">
+                        <label for="periodEnd" class="form-label">Period End:</label>
+                        <mat-form-field>
+                            <mat-label>Choose a date</mat-label>
+                            <input matInput [matDatepicker]="picker2" class="form-control"
+                                formControlName="periodEnd" />
+                            <mat-hint>MM/DD/YYYY</mat-hint>
+                            <mat-datepicker-toggle matIconSuffix [for]="picker2"></mat-datepicker-toggle>
+                            <mat-datepicker #picker2></mat-datepicker>
+                        </mat-form-field>
+                        <div *ngIf="
+                            reactiveForm.get('periodEnd')?.invalid &&
+                            reactiveForm.get('periodEnd')?.touched
+                          " class="error-message">
+                            Period End is required
+                        </div>
+                    </div>
+
+                    <div class="form-check p-4">
+                        <input type="checkbox" class="form-check-input" id="changeOrderSummary"
+                            formControlName="changeOrderSummary" />
+                        <label for="changeOrderSummary" class="form-check-label"> Change Order Summary</label>
+                    </div>
+
+
+
+                </div>
+            </div>
+            <div class="d-grid gap-2 d-md-flex justify-content-md-end p-5">
+                <button type="submit" class="btn btn-primary">Submit</button>
+                <button type="reset" class="btn btn-secondary">Cancel</button>
+            </div>
+        </form>
+    </div>
+</div>

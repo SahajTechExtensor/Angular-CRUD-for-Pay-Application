@@ -1,0 +1,44 @@
+
+<section class="display-section container" id="display-section">
+    <div class="heading">
+      <h1>Pay Applications</h1>
+        <hr>
+    </div>
+    <div class="tableDiv table-responsive">
+      <table class="table table-hover">
+        <thead>
+          <tr class="table-dark txt-center">
+            <th scope="col">Number</th>
+            <th scope="col">Date</th>
+            <th scope="col">Period Start</th>
+            <th scope="col">Period End</th>
+            <th scope="col">Certificate</th>
+            <th scope="col">Retainage</th>
+            <th scope="col">Action</th>
+          </tr>
+        </thead>
+        <tbody>
+          <ng-container *ngIf="isDataAvailable;then tableBody; else emptyTableBody"></ng-container>
+          <ng-template #emptyTableBody>
+            <tr class="txt-center">
+              <td colspan="7">No Data Found.</td>
+            </tr>
+          </ng-template>
+          <ng-template #tableBody>
+            <tr class="txt-center" *ngFor="let application of applicationList; let i = index">
+                      <td>{{ application.ApplicationNumber}}</td>
+                      <td>{{ application.ApplicationDate | date:'mediumDate' }}</td>
+                      <td>{{ application.PeriodFrom | date:'mediumDate'}}</td>
+                      <td>{{ application.PeriodTo | date:'mediumDate'}}</td>
+                      <td>{{ application.Certificate}}</td>
+                      <td>{{ application.Retainage}}</td>
+                      <td>
+                        <i class="bi bi-pen" (click)="onEditApplication(application)" ></i>
+                      </td>
+                  </tr>
+          </ng-template>
+        </tbody>
+      </table>
+    </div>
+  </section>
+  
